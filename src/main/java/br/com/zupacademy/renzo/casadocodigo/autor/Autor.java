@@ -1,6 +1,8 @@
-package br.com.zupacademy.renzo.modelo;
+package br.com.zupacademy.renzo.casadocodigo.autor;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,48 +34,37 @@ public class Autor {
 		this.email = email;
 		this.descricao = descricao;
 	}
-	public Long getId() {
-		return id;
-	}
-	public String getNome() {
-		return nome;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public String getDescricao() {
-		return descricao;
-	}
-	public LocalDateTime getDataRegistro() {
-		return dataRegistro;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
-	public void setDataRegistro(LocalDateTime dataRegistro) {
-		this.dataRegistro = dataRegistro;
-	}
 
 	@Override
 	public String toString() {
 		return "Autor [nome=" + nome + ", email=" + email + ", descricao=" + descricao + ", dataRegistro="
 				+ dataRegistro + "]";
 	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public LocalDateTime getDataRegistro() {
+		return dataRegistro;
+	}
 	
+	public static List<AutorDto> toDtoList(List<Autor> autores){
+		
+		return autores.stream().map(AutorDto::new).collect(Collectors.toList());
+	}
 	
 	
 }
