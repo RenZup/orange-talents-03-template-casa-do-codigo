@@ -1,5 +1,6 @@
 package br.com.zupacademy.renzo.casadocodigo.autor;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -9,10 +10,10 @@ public class AutorForm {
 	private String nome;
 	@Email
 	private String email;
-	//@NotNull @NotEmpty
+	@NotNull @NotEmpty
 	private String descricao;
 	
-	public AutorForm(@NotNull @NotEmpty String nome, @Email String email, String descricao) {
+	public AutorForm(@NotNull @NotEmpty String nome, @Email String email, @Valid String descricao) {
 		this.nome = nome;
 		this.email = email;
 		this.descricao = descricao;
