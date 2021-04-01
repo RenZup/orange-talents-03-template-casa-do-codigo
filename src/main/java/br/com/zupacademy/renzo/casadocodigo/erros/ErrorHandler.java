@@ -37,8 +37,8 @@ public class ErrorHandler {
 		
 		@ResponseStatus(HttpStatus.BAD_REQUEST)
 		@ExceptionHandler(EmailDuplicadoException.class)
-		private String handleValidationError(EmailDuplicadoException exception) {
-			return exception.getMessage();
+		private ErrorDto handleValidationError(EmailDuplicadoException exception) {
+			return new ErrorDto("Email", exception.getMessage());
 		}
 		
 }

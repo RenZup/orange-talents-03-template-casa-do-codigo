@@ -27,9 +27,8 @@ public class AutorController {
 	@PostMapping
 	public ResponseEntity<AutorDto> cadastrar(@RequestBody @Valid AutorForm form, UriComponentsBuilder uriBuilder) throws EmailDuplicadoException{
 		Autor autor = form.toAutor();
-		
-		Optional<Autor> autorEmail = autorRepository.findByEmail(autor.getEmail());
-		if (autorEmail.isPresent()) throw new EmailDuplicadoException();
+
+		if (autorRepository.existsByEmail(autor.getEmail())) throw new EmailDuplicadoException();
 	
 		autorRepository.save(autor);
 		
