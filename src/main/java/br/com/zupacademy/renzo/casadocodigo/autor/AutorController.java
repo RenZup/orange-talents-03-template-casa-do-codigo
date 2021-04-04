@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import br.com.zupacademy.renzo.casadocodigo.erros.EmailDuplicadoException;
-
 @RestController
 @RequestMapping("/autores")
 public class AutorController {
@@ -24,11 +22,9 @@ public class AutorController {
 	AutorRepository autorRepository;
 	
 	@PostMapping
-	public ResponseEntity<AutorDto> cadastrar(@RequestBody @Valid AutorForm form, UriComponentsBuilder uriBuilder) throws EmailDuplicadoException{
+	public ResponseEntity<AutorDto> cadastrar(@RequestBody @Valid AutorForm form, UriComponentsBuilder uriBuilder){
+		
 		Autor autor = form.toAutor();
-
-		if (autorRepository.existsByEmail(autor.getEmail())) throw new EmailDuplicadoException();
-	
 		autorRepository.save(autor);
 		
 		URI uri = uriBuilder.path("/autores/{id}").buildAndExpand(autor.getId()).toUri();

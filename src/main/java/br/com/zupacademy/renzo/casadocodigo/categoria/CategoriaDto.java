@@ -1,11 +1,12 @@
 package br.com.zupacademy.renzo.casadocodigo.categoria;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
+
+import br.com.zupacademy.renzo.casadocodigo.compartilhado.UniqueValue;
 
 public class CategoriaDto {
-	@NotNull
-	@NotEmpty
+	@NotBlank
+	@UniqueValue(domainClass = Categoria.class,fieldName = "nome")
 	private String nome;
 	
 	@Deprecated

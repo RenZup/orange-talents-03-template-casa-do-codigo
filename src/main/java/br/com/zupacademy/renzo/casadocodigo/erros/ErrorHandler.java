@@ -35,16 +35,5 @@ public class ErrorHandler {
 
 		}
 		
-		@ResponseStatus(HttpStatus.BAD_REQUEST)
-		@ExceptionHandler(EmailDuplicadoException.class)
-		private ErrorDto handleValidationError(EmailDuplicadoException exception) {
-			return new ErrorDto("Email", exception.getMessage());
-		}
-		
-		@ResponseStatus(HttpStatus.BAD_REQUEST)
-		@ExceptionHandler(CategoriaDuplicadaException.class)
-		private ErrorDto handleValidationError(CategoriaDuplicadaException exception) {
-			return new ErrorDto("Categoria", exception.getMessage());
-		}
 		
 }

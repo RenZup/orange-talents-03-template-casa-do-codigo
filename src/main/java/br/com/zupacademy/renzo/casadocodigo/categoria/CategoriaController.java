@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import br.com.zupacademy.renzo.casadocodigo.erros.CategoriaDuplicadaException;
-
 @RestController
 @RequestMapping("/categorias")
 public class CategoriaController {
@@ -25,10 +23,8 @@ public class CategoriaController {
 	
 		@PostMapping
 		@Transactional
-		public ResponseEntity<CategoriaDto> criar(@RequestBody @Valid CategoriaDto form, UriComponentsBuilder uriBuilder) throws CategoriaDuplicadaException{
-			
-			if(catRepository.existsByNome(form.getNome())) throw new CategoriaDuplicadaException();
-			
+		public ResponseEntity<CategoriaDto> criar(@RequestBody @Valid CategoriaDto form, UriComponentsBuilder uriBuilder){
+						
 			Categoria categoria = new Categoria(form.getNome());
 			URI uri = uriBuilder.path("/categorias/{id}").buildAndExpand(categoria.getId()).toUri();
 			

@@ -1,19 +1,21 @@
 package br.com.zupacademy.renzo.casadocodigo.autor;
 
-import javax.validation.Valid;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
+import br.com.zupacademy.renzo.casadocodigo.compartilhado.UniqueValue;
 
 public class AutorForm {
-	@NotNull @NotEmpty
+	@NotBlank
 	private String nome;
-	@Email
+	@NotBlank
+	@Email @UniqueValue(domainClass = Autor.class, fieldName = "email")
 	private String email;
-	@NotNull @NotEmpty
+	@NotBlank @Size(max = 400)
 	private String descricao;
 	
-	public AutorForm(@NotNull @NotEmpty String nome, @Email String email, @Valid String descricao) {
+	public AutorForm(@NotBlank String nome, @Email @NotBlank String email, @NotBlank @Size(max = 400) String descricao) {
 		this.nome = nome;
 		this.email = email;
 		this.descricao = descricao;
