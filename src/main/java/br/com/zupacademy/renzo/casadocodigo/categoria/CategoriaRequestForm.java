@@ -4,15 +4,15 @@ import javax.validation.constraints.NotBlank;
 
 import br.com.zupacademy.renzo.casadocodigo.compartilhado.UniqueValue;
 
-public class CategoriaDto {
+public class CategoriaRequestForm {
 	@NotBlank
 	@UniqueValue(domainClass = Categoria.class,fieldName = "nome")
 	private String nome;
 	
 	@Deprecated
-	public CategoriaDto(){}
+	public CategoriaRequestForm(){}
 	
-	public CategoriaDto(Categoria categoria) {
+	public CategoriaRequestForm(Categoria categoria) {
 		this.nome = categoria.getNome();
 	}
 	

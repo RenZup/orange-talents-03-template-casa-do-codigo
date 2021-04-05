@@ -2,14 +2,18 @@ package br.com.zupacademy.renzo.casadocodigo.autor;
 
 import java.time.LocalDateTime;
 
-public class AutorDto {
+import com.fasterxml.jackson.annotation.JsonFormat;
 
+public class AutorResponseDto {
+	private Long id;
 	private String nome;
 	private String email;
 	private String descricao;
-	private LocalDateTime dataRegistro = LocalDateTime.now();
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
+	private LocalDateTime dataRegistro;
 	
-	public AutorDto(Autor autor) {
+	public AutorResponseDto(Autor autor) {
+		this.id=autor.getId();
 		this.nome = autor.getNome();
 		this.dataRegistro= autor.getDataRegistro();
 		this.email = autor.getEmail();
@@ -30,6 +34,10 @@ public class AutorDto {
 
 	public LocalDateTime getDataRegistro() {
 		return dataRegistro;
+	}
+
+	public Long getId() {
+		return id;
 	}
 	
 	

@@ -61,9 +61,9 @@ public class Autor {
 		return dataRegistro;
 	}
 	
-	public static List<AutorDto> toDtoList(List<Autor> autores){
+	public static List<AutorResponseDto> toDtoList(List<Autor> autores){
 		
-		return autores.stream().map(AutorDto::new).collect(Collectors.toList());
+		return autores.stream().map(AutorResponseDto::new).collect(Collectors.toList());
 	}
 	
 	

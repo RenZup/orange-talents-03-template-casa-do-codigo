@@ -31,8 +31,8 @@ public class Categoria {
 		return nome;
 	}
 
-	public static List<CategoriaDto> toDto(List<Categoria> lista) {
-		return lista.stream().map(CategoriaDto::new).collect(Collectors.toList());
+	public static List<CategoriaResponseDto> toDto(List<Categoria> lista) {
+		return lista.stream().map(CategoriaResponseDto::new).collect(Collectors.toList());
 	}
 	
 	

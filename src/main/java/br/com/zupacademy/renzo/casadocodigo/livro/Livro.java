@@ -1,6 +1,8 @@
 package br.com.zupacademy.renzo.casadocodigo.livro;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -100,8 +102,12 @@ public class Livro {
 		this.categoria = categoria;
 		this.autor = autor;
 	}
+	@Deprecated
+	public Livro() {}
 
-
+	public static List<LivroResponseDto> toDtoList(List<Livro> lista) {
+		return lista.stream().map(LivroResponseDto::new).collect(Collectors.toList());
+	}
 	
 	
 }

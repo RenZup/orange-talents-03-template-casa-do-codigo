@@ -22,18 +22,18 @@ public class AutorController {
 	AutorRepository autorRepository;
 	
 	@PostMapping
-	public ResponseEntity<AutorDto> cadastrar(@RequestBody @Valid AutorForm form, UriComponentsBuilder uriBuilder){
+	public ResponseEntity<AutorResponseDto> cadastrar(@RequestBody @Valid AutorForm form, UriComponentsBuilder uriBuilder){
 		
 		Autor autor = form.toAutor();
 		autorRepository.save(autor);
 		
 		URI uri = uriBuilder.path("/autores/{id}").buildAndExpand(autor.getId()).toUri();
 		
-		return ResponseEntity.created(uri).body(new AutorDto(autor));
+		return ResponseEntity.created(uri).body(new AutorResponseDto(autor));
 		
 	}
 	@GetMapping
-	public List<AutorDto> listar(){
+	public List<AutorResponseDto> listar(){
 		List<Autor> lista = autorRepository.findAll();
 		
 		return Autor.toDtoList(lista);

@@ -23,18 +23,18 @@ public class CategoriaController {
 	
 		@PostMapping
 		@Transactional
-		public ResponseEntity<CategoriaDto> criar(@RequestBody @Valid CategoriaDto form, UriComponentsBuilder uriBuilder){
+		public ResponseEntity<CategoriaResponseDto> criar(@RequestBody @Valid CategoriaRequestForm form, UriComponentsBuilder uriBuilder){
 						
 			Categoria categoria = new Categoria(form.getNome());
 			URI uri = uriBuilder.path("/categorias/{id}").buildAndExpand(categoria.getId()).toUri();
 			
 			catRepository.save(categoria);
 			
-			return ResponseEntity.created(uri).body(form);
+			return ResponseEntity.created(uri).body(new CategoriaResponseDto(categoria));
 		}
 		
 		@GetMapping
-		public List<CategoriaDto> listar(){
+		public List<CategoriaResponseDto> listar(){
 			
 			List<Categoria> lista = catRepository.findAll();
 			

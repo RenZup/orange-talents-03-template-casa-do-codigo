@@ -23,7 +23,7 @@ import br.com.zupacademy.renzo.casadocodigo.categoria.Categoria;
 import br.com.zupacademy.renzo.casadocodigo.compartilhado.ExistingId;
 import br.com.zupacademy.renzo.casadocodigo.compartilhado.UniqueValue;
 
-public class LivroDto {
+public class LivroRequestForm {
 	
 	@NotBlank @UniqueValue(domainClass = Livro.class, fieldName = "titulo")
 	private String titulo;
@@ -57,10 +57,10 @@ public class LivroDto {
 	private Long autorId;
 	
 	@Deprecated
-	public LivroDto() {}
+	public LivroRequestForm() {}
 	
 	
-	public LivroDto(@NotBlank String titulo, @NotBlank @Length(max = 500) String resumo, String sumario,
+	public LivroRequestForm(@NotBlank String titulo, @NotBlank @Length(max = 500) String resumo, String sumario,
 			@NotNull @Min(20) Double preco, @Min(100) Integer numeroPaginas, @ISBN String isbn,
 			@Future LocalDate dataPublicacao, @NotNull Long categoriaId, @NotNull Long autorId) {
 		this.titulo = titulo;
