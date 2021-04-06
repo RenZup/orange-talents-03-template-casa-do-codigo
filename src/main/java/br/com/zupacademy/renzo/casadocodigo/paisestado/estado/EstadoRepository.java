@@ -1,11 +1,14 @@
 package br.com.zupacademy.renzo.casadocodigo.paisestado.estado;
 
-import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import br.com.zupacademy.renzo.casadocodigo.paisestado.pais.Pais;
+import org.springframework.data.jpa.repository.Query;
 
 public interface EstadoRepository extends JpaRepository<Estado, Long> {
-	Boolean existsByNomeAndPais(String nome, Pais pais);
+	
+	@Query("Select e FROM Estado e WHERE nome = :nome AND id_pais = :idPais")
+	Optional<Estado> existsEstadoComEsseNomeNoPais(String nome, Long idPais);
+	
+	
 }
