@@ -1,9 +1,11 @@
 package br.com.zupacademy.renzo.casadocodigo.cliente;
 
 import java.net.URI;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
@@ -31,11 +33,17 @@ public class ClienteController {
 		
 		Pais pais = em.find(Pais.class, form.getPaisId());
 		Estado estado = null;
+		
 		if(form.getEstadoId() != null) {
 			estado = em.find(Estado.class, form.getEstadoId());
 			if(estado.getPais() != pais) {
 				return ResponseEntity.badRequest().body(new ErrorDto("estado", "Estado não existe no pais " + pais.getNome()));
 			}
+		}else {
+			List resultList = em.createQuery("SELECT 1 FROM Estado WHERE id_Pais = :idPais")
+					.setParameter("idPais", pais.getId())
+					.getResultList();
+			if(!resultList.isEmpty()) return ResponseEntity.badRequest().body(new ErrorDto("estado", "Estado nao deve ser nulo em paises que possuem estados."));
 		}
 				
 		Cliente cliente = new Cliente(form,pais,estado);
