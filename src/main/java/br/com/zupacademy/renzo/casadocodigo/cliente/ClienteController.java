@@ -5,11 +5,11 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,7 +40,7 @@ public class ClienteController {
 				return ResponseEntity.badRequest().body(new ErrorDto("estado", "Estado não existe no pais " + pais.getNome()));
 			}
 		}else {
-			List resultList = em.createQuery("SELECT 1 FROM Estado WHERE id_Pais = :idPais")
+			List<Estado> resultList = em.createQuery("SELECT 1 FROM Estado WHERE id_Pais = :idPais",Estado.class)
 					.setParameter("idPais", pais.getId())
 					.getResultList();
 			if(!resultList.isEmpty()) return ResponseEntity.badRequest().body(new ErrorDto("estado", "Estado nao deve ser nulo em paises que possuem estados."));
@@ -55,6 +55,14 @@ public class ClienteController {
 		URI uri = uriBuilder.path("/clientes/{id}").buildAndExpand(cliente.getId()).toUri();
 		return ResponseEntity.created(uri).body(dto);
 	}
+	
+	@GetMapping
+	public List<ClienteResponseDto> listar(){
+		List<Cliente> resultList = em.createQuery("SELECT c FROM Cliente c",Cliente.class).getResultList();
 		
+		return ClienteResponseDto.toDto(resultList);
+		
+	}
+	
 }
 

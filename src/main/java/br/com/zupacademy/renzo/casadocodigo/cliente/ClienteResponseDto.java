@@ -1,5 +1,8 @@
 package br.com.zupacademy.renzo.casadocodigo.cliente;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class ClienteResponseDto {
 	private Long id;
 	private String nome;
@@ -79,7 +82,12 @@ public class ClienteResponseDto {
 	public Integer getCep() {
 		return cep;
 	}
-
+	
+	public static List<ClienteResponseDto> toDto (List<Cliente> clientes){
+		return clientes.stream().map(ClienteResponseDto::new).collect(Collectors.toList());
+	}
+	
+	
 	@Override
 	public String toString() {
 		return "ClienteResponseDto [id=" + id + ", nome=" + nome + ", sobrenome=" + sobrenome + ", email=" + email
