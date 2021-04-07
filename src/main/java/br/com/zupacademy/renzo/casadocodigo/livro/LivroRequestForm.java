@@ -3,7 +3,6 @@ package br.com.zupacademy.renzo.casadocodigo.livro;
 import java.time.LocalDate;
 
 import javax.persistence.EntityManager;
-import javax.validation.Valid;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -11,9 +10,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.ISBN;
-import org.hibernate.validator.constraints.ISBN.Type;
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraintvalidators.RegexpURLValidator;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
